@@ -1,11 +1,12 @@
 
 
 # Virtual Thread
-目前的问题： https://github.com/SAP/SapMachine/wiki/Essential-Information-on-Virtual-Threads
 
 由JEP444 发起，在JDK 21中正式发布。相比平台线程更加轻量级，在某些场景下可以显著提供程序的吞吐量，API使用也十分的简单，不需要太多的学习成本。
 
-> 虚拟线程具体实现参考：https://bytejava.cn/md/jvm/jvm/virtualthread/virtual-thread.html
+目前存在的问题： https://github.com/SAP/SapMachine/wiki/Essential-Information-on-Virtual-Threads
+> JVM层面 虚拟线程具体实现参考：https://bytejava.cn/md/jvm/jvm/virtualthread/virtual-thread.html
+
 
 常见用法
 ```java

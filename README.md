@@ -6,16 +6,16 @@
 
 ## 关于本仓库
 
-日常开发与学习中积累的技术笔记，覆盖 Java 生态、Spring 框架源码、并发编程、算法、运维等领域。笔记以 Markdown 格式组织，图文并茂，包含大量 draw.io 绘制的架构图和流程图。
+日常开发与学习中积累的技术笔记，覆盖 Java 生态、Spring 框架源码、并发编程、网络、爬虫及逆向等领域。笔记以 Markdown 格式组织，图文并茂，包含大量 draw.io 绘制的架构图和流程图。
 
 ---
 
 ## 技术栈全景
 
 ### ☕ Java 核心
+
 深入 JDK 源码，聚焦并发与集合：
 
-- **多线程** — 线程实现方式、生命周期、安全与协作
 - **线程池** — 设计与调优
 - **ThreadLocal & TTL** — FastThreadLocal、TransmittableThreadLocal
 - **JUC 并发** — AQS、ReentrantReadWriteLock、ConcurrentHashMap、ConcurrentLinkedQueue、ConcurrentSkipListMap、LinkedTransferQueue、Fork-Join
@@ -25,12 +25,14 @@
 📂 [java/](java/)
 
 ### 🆕 JDK 新特性
+
 - **Virtual Thread** — 虚拟线程、Continuation 模型、Pinning 场景
 - **JFR** — Java Flight Recorder 配置与实战
 
 📂 [java/jdk21-virtual-thread.md](java/jdk21-virtual-thread.md) · [java/jfr.md](java/jfr.md)
 
 ### 🏗 Spring 生态
+
 基于源码级别的深度分析：
 
 - **Spring 源码** — IoC 容器、Bean 生命周期
@@ -40,59 +42,32 @@
 - **Spring Cloud** — 微服务全家桶
 - **Spring Cache & Redis** — TTL / TTI 精细化配置
 - **Spring WebFlux** — Reactor 模型、背压机制
-- **Spring AI** — ChatClient 源码、RAG Pipeline、Function Calling
 - **Spring Data JPA / Hibernate** — 源码解析
 - **MyBatis-Plus** — 插件机制、缓存
 
 📂 [后端框架/](%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/)
 
 ### 📨 网络 & 中间件
+
 - **Netty** — Reactor 模型、Pipeline、ByteBuf 源码分析
 - **HTTP 协议** — curl 诊断、HTTP/2
 
 📂 [netty/](netty/) · [2025/HTTP.md](2025/HTTP.md)
 
-### 💾 缓存 & 存储
-- **Redis** — 数据结构、持久化、集群、分布式锁
-- **FastDFS** — 分布式文件系统
-
-📂 [运维/redis.md](%E8%BF%90%E7%BB%B4/redis.md) · [运维/fastdfs安装文档.md](%E8%BF%90%E7%BB%B4/fastdfs%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3.md)
-
-### 📐 算法 & 数据结构
-- 数据结构与算法基础
-- **红黑树** — 手写源码，旋转与变色
-- **图论** — BFS、DFS 及进阶搜索
-- **LeetCode 刷题笔记**
-- 高级搜索算法 & 字符串
-
-📂 [算法/](%E7%AE%97%E6%B3%95/)
-
-### 🚀 运维 & DevOps
-- **Docker** — 镜像构建、网络、编排
-- **Linux** — 常用命令、系统调优
-- **Nginx** — 反向代理、负载均衡
-- **Skywalking** — 全链路追踪
-- **Gradle** — 构建工具
-- **NiFi + LDAP** — 数据流管理
-
-📂 [运维/](%E8%BF%90%E7%BB%B4/)
-
-### 🌐 前端
-- Vue.js、路由 & Vuex & Nuxt、JavaScript 高级、CSS、Thymeleaf、Ajax
-
-📂 [前端/](%E5%89%8D%E7%AB%AF/)
-
 ### 🐍 爬虫 & 脚本
+
 - Python 爬虫、Scrapy、验证码识别
 
 📂 [爬虫/](%E7%88%AC%E8%99%AB/)
 
 ### 🔬 逆向工程
+
 - Android 逆向（ADB 抓包）、Windows 逆向
 
 📂 [逆向/](%E9%80%86%E5%90%91/)
 
 ### 📦 其他
+
 - **Go** — 基础语法、Beego 框架
 - **Rust** — 学习笔记
 - **编译 V8** — Chromium V8 编译实践
