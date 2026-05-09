@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>个人技术笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Java 后端工程师 · 持续记录、深度整理的技术知识库">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root {
+      --content-max-width: 52em;
+      --sidebar-width: 16rem;
+    }
+    body { font-size: 15px; }
+    .markdown-section { max-width: var(--content-max-width); padding: 0 1.5rem; }
+
+    .sidebar {
+      background: #f6f8fa;
+      border-right: 1px solid #e1e4e8;
+    }
+    .sidebar-nav ul li a { font-size: .88rem; color: #444; }
+    .sidebar-nav ul li.active > a {
+      color: #0366d6; font-weight: 600;
+      border-right: 3px solid #0366d6;
+    }
+    .sidebar-nav .app-sub-sidebar li > a { font-size: .8rem; padding-left: 1.2rem; }
+
+    .app-nav { margin: 20px 60px 0 0; }
+    .app-nav a { color: #586069; font-size: .88rem; }
+    .app-nav a:hover { color: #0366d6; }
+
+    section.cover { min-height: 60vh; }
+    section.cover .cover-main { margin: 20vh auto 0; }
+    section.cover h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: -.5px; }
+    section.cover blockquote { color: #586069; border-left: none; font-size: 1rem; margin: .8rem auto 2rem; }
+    section.cover .cover-main > p:last-child a {
+      display: inline-block; padding: 8px 24px; margin: .4rem 6px;
+      border: 1px solid #0366d6; border-radius: 6px;
+      color: #0366d6; font-size: .9rem; text-decoration: none;
+    }
+    section.cover .cover-main > p:last-child a:first-child {
+      background: #0366d6; color: #fff;
+    }
+    section.cover .cover-main > p:last-child a:last-child {
+      border-color: #d0d7de; color: #24292f; background: #f6f8fa;
+    }
+
+    .markdown-section pre { background: #f6f8fa; border-radius: 6px; }
+    .markdown-section code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: .85em; }
+    .markdown-section img { max-width: 100%; border-radius: 6px; }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1117; color: #c9d1d9; }
+      .sidebar { background: #161b22; border-right-color: #30363d; }
+      .sidebar-nav ul li a { color: #8b949e; }
+      .sidebar-nav ul li.active > a { color: #58a6ff; border-right-color: #58a6ff; }
+      .markdown-section pre { background: #161b22; }
+      section.cover { background: #0d1117 !important; }
+      section.cover blockquote { color: #8b949e; }
+      .app-nav a { color: #8b949e; }
+      .app-nav a:hover { color: #58a6ff; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { width: var(--sidebar-width); }
+      section.cover h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">加载中...</div>
+  <script>
+    window.$docsify = {
+      name: '个人技术笔记',
+      repo: 'https://github.com/xiaoye-2018/tech-blog',
+      loadSidebar: '_sidebar.md',
+      coverpage: '_coverpage.md',
+      onlyCover: false,
+      auto2top: true,
+      relativePath: true,
+      maxLevel: 3,
+      subMaxLevel: 2,
+      search: {
+        placeholder: '搜索文章...',
+        noData: '没有找到结果',
+        depth: 4
+      }
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
+</body>
+</html>

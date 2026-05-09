@@ -1,0 +1,25 @@
+<mxfile host="Electron" modified="2025-01-14T13:53:42.372Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="xAYgpobz8UfL_4AxahVp" version="21.6.8" type="device">
+  <diagram name="初始化" id="yUoBI6Tp7Meb0Q9lCHbw">
+    <mxGraphModel dx="1925" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZVjhflGfx1k75yrZ1K4J-1" value="&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;new HikariDataSource(HikariConfig)&lt;/pre&gt;&lt;/pre&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=16;fillColor=#f8cecc;strokeColor=#b85450;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="210" width="270" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVjhflGfx1k75yrZ1K4J-2" value="&lt;div style=&quot;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;通过config初始化HikariDataSource&lt;/pre&gt;&lt;/pre&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=16;fillColor=#f5f5f5;strokeColor=#666666;fontColor=default;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="164" y="70" width="250" height="31" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVjhflGfx1k75yrZ1K4J-5" value="&lt;div style=&quot;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;sealed = true， 标记连接池已经初始化完成&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/pre&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=16;fillColor=#f5f5f5;strokeColor=#666666;fontColor=default;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="164" y="350" width="316" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVjhflGfx1k75yrZ1K4J-6" value="&lt;div style=&quot;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:10.5pt;&quot;&gt;new HikariPool&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/pre&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=16;fillColor=#f5f5f5;strokeColor=#666666;fontColor=default;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="163.5" y="210" width="250" height="31" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVjhflGfx1k75yrZ1K4J-7" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;shadow=0;glass=0;sketch=0;strokeColor=#82b366;fillColor=#d5e8d4;fontSize=14;rotation=0;fontFamily=Helvetica;fontColor=default;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="99" width="40" height="282" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

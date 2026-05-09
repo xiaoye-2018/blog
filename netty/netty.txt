@@ -1,0 +1,76 @@
+  
+保活机制用于 释放调无用的链接，如客户端宕机、意外重启等
+
+1. TCP 保活机制，需要设置socket参数：SO_KEEPALIVE， 默认false，如果客户端与服务端建立链接后，一直没有数据发送，将会一直保留该链接
+                    true：表示达到保活时间后，会发送心跳包确保对方是否在线，不在线则关闭链接，避免无用的链接占用系统资源
+                        默认时间： net.ipv4.tcp_keepalive_time=7200    保活时间：多长时间内没有发送数据，开始触发检测
+                                  net.ipv4.tcp_keepalive_intvl=75     保活时间到达后，每次触发检测的时间间隔
+                                  net.ipv4.tcp_keepalive_probes=9     最多触发多少次检测， 如果9次都没有数据返回，那么关闭该连接
+    默认时间较长，通常情况客户端会设置一个较短的keepalive_time，比如60s内没请求就开始触发保活检测机制.   (tomcat 返回的keep-alive参数)， 
+    chrome 浏览器： 猜测： 初次请求后没有数据再次发送60s后直接关闭(tomcat 返回的keep-alive参数，默认60)
+               tcp_keepalive_time = 0， tcp_keepalive_intvl = 15， tcp_keepalive_probes = 2
+    postman ： tcp_keepalive_time = 0， tcp_keepalive_intvl = 1， tcp_keepalive_probes
+    curl： 不支持保活机制
+
+2. HTTP 1.1 中的 默认请求参数：Connection: keep-alive,  tomcat默认响应会携带参数： Keep-Alive: timeout=60; 表示60s内没有收到请求，将会断开该链接，向客户端响应FIN
+    springboot参数：tomcat.keep-alive-timeout 可以指定具体时间,   
+    具体逻辑：org.apache.tomcat.util.net.NioEndpoint.Poller#timeout
+    org.apache.tomcat.util.net.NioEndpoint.SocketProcessor#doRun： 关闭socket：poller.cancelledKey(getSelectionKey(), socketWrapper);
+
+    可以使用 'Connection: close' 来关闭http 的保活，发送请求后立即关闭连接。 具体看http协议的实现
+
+
+
+Netty 内存泄露检测：
+
+ResourceLeakDetector.Level.PARANOID: 每次分配的对象都进行采样， ByteBuf都会包装为AdvancedLeakAwareByteBuf(extends SimpleXXXX)，一旦被包装，该ByteBuf的很多方法调用之前都会记录操作日志，包括pipeline#touch
+
+ResourceLeakDetector: 内存泄漏，全局对象， allLeaks： 创建DefaultResourceLeak(refObj,refQueue)对象时，会将其添加到allLeaks
+                                         refQueue： 引用队列，当 对象GC后，放入该队列
+                                         reportedLeaks： 记录TraceRecord的字符串， 使用Set 为了保证同一个代码位置的内存泄漏只报告一次
+                                         reportLeak(): 获取被GC的对象，获取TraceRecord字符串放入reportedLeaks，  track() 方法才会执行改方法
+
+ResourceLeakDetector#track： 跟踪资源，创建DefaultResourceLeak。 每次会调用reportLeak检查是否有泄漏的对象。  reportLeak --> dispose: 检查allLeaks 是否已经清理
+                                                                                                                      toString： 获取headUpdater 中的TraceRecord，存入reportedLeaks
+                                                                                                                      printlog
+
+
+DefaultResourceLeak --> weakReference
+                    ---> ResourceLeakTracker
+                  static headUpdater:  记录当前对象对应的TraceRecode到head
+                  record： 创建TraceRecord，生成一个链表
+
+ResourceLeakTracker: 跟踪对象，包含了 ResourceLeakDetector#refQueue
+
+
+开启内存泄漏检测后，默认在分配内存时会自动进行跟踪buffer对象: PooledByteBufAllocator#newDirectBuffer ---> toLeakAwareBuffer
+
+
+
+
+
+
+NioByteUnsafe#read(): 池中分配PooledUnsafeDirectBuf (包装JDK 的DirectByteBuffer)
+
+HeadContext#write，#flush ---> unsafe.xxx
+
+DefaultChannelPipeline.HeadContext#write():
+     1. 如果buffer不是direct，那么会进行转换为directBuf，
+        AbstractUnsafe#write ---> filterOutboundMessageAbstractNioChannel#newDirectBuffer(ByteBuf)， 同时清空原来buffer，ReferenceCountUtil.safeRelease
+DefaultChannelPipeline.HeadContext#flush():
+     2. NioSocketChannel#doWrite ---> nioBuffers():  转换为NIO的DirectByteBuffer，用于最终写入socket
+                         #doWrite --> in.removeBytes ---> removeBytes() 
+                                                     --> remove()  
+                                                        -->  ReferenceCountUtil.safeRelease: 清空原来①中创建的directBuf(实际上跟②中的DirectByteBuffer 内存地址相同)
+                                                            AdvancedLeakAwareByteBuf#release():
+                                                                             buffer.release()、
+                                                                             closeLeak(): 清空reference，使对象GC后不在入队
+
+
+
+ReferenceCountUtil.safeRelease： 这里的清理内存都是将内存还给内存池，并非销毁内存
+
+
+Unpooled.directBuffer: 最终都会调用ByteBuffer.allocateDirect，由Cleanner自动清理
+InstrumentedUnpooledUnsafeNoCleanerDirectByteBuf(默认)
+InstrumentedUnpooledUnsafeDirectByteBuf
