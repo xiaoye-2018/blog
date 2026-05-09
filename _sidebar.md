@@ -1,5 +1,8 @@
 <!-- _sidebar.md -->
-
+* **🆕 JDK 新特性**
+  * [Virtual Thread](/java/jdk21-virtual-thread.md)
+  * [JFR 实战](/java/jfr.md)
+  * 
 * **☕ Java 核心**
   * [线程池](/java/线程池.md)
   * [ThreadLocal & TTL](/java/Threadlocal&TTL.md)
@@ -16,10 +19,6 @@
   * [SPI 机制](/java/SPI机制.md)
   * [Java 杂项](/java/miscellaneous.md)
   * [Java Reference](/java/Java reference.md)
-  
-* **🆕 JDK 新特性**
-  * [Virtual Thread](/java/jdk21-virtual-thread.md)
-  * [JFR 实战](/java/jfr.md)
 
 * **🏗 Spring 生态**
   * [Spring 源码](/后端框架/Spring.md)
