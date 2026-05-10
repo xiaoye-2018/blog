@@ -28,12 +28,12 @@
   * [Spring Data JPA](/后端框架/Hibernate&Spring-Data-JPA.md)
   * [MyBatis-Plus](/后端框架/mybatis-plus.md)
   * [Spring Cloud](/后端框架/springcloud.md)
-  * [Spring 整合Redis自定义超时](/后端框架/spring_customize_redis_timeout.md)
+  * [Spring 整合Redis自定义超时](/2025/spring_customize_redis_timeout.md)
 
 * **📨 中间件**
   * [Netty](/netty/netty.md)
-  * [Lettuce 浅析](/后端框架/lettuce实现分析.md)
-  * [Redission 浅析](/后端框架/redission浅析.md)
+  * [Lettuce 浅析](/2025/lettuce实现分析.md)
+  * [Redission 浅析](/2025/redission浅析.md)
   * [HTTP 协议](/2025/HTTP.md)
 
 * **🐍 爬虫 & 脚本**

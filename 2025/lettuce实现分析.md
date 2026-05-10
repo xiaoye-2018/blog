@@ -415,7 +415,7 @@ io.lettuce.core.event.DefaultEventBus#publish：
 ```
 
 注意： **如果引入了micrometer**, 默认会使用MicrometerCommandLatencyRecorder 作为latencyRecorder，不满足下面条件。 导致无法创建eventPulisher，因此无法使用JFR。
-![img_6.png](../2025/img/img_6.png)
+![img_6.png](img/img_6.png)
 
 我们直接排除自动装配类：LettuceMetricsAutoConfiguration， 让Lettuce 使用DefaultCommandLatencyCollector
 
