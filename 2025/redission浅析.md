@@ -4,11 +4,11 @@
 
 一个client 内部创建两个Bootstrap
 
-![image-20260409220141725](spring cache & lettuce.assets/image-20260409220141725.png)
+![image-20260409220141725](spring-cache&lettuce.assets/image-20260409220141725.png)
 
 
 
-![image-20260409220024475](spring cache & lettuce.assets/image-20260409220024475.png)
+![image-20260409220024475](spring-cache&lettuce.assets/image-20260409220024475.png)
 
 
 
@@ -19,12 +19,12 @@
 ### 分布式锁
 redissonClient.getLock
 
-![image-20260409222041519](spring cache & lettuce.assets/image-20260409222041519.png)
+![image-20260409222041519](spring-cache&lettuce.assets/image-20260409222041519.png)
 
 如果有其他线程持有锁，将会返回锁过期时间，然后订阅channel，当锁过期时会发布事件唤醒
 redisson_lock__channel:{test_lock}
 
-![image-20260412134926773](spring cache & lettuce.assets/image-20260412134926773.png)
+![image-20260412134926773](spring-cache&lettuce.assets/image-20260412134926773.png)
 
 
 
@@ -38,7 +38,7 @@ redisson_lock__channel:{test_lock}
 
 org.redisson.RedissonLock#unlockInnerAsync
 
-![image-20260412131314041](spring cache & lettuce.assets/image-20260412131314041.png)
+![image-20260412131314041](spring-cache&lettuce.assets/image-20260412131314041.png)
 
 当解锁成功时，会发送事件唤醒等待获取锁的线程。
 
@@ -52,9 +52,9 @@ org.redisson.RedissonLock#unlockInnerAsync
 
 获取到锁后会生成任务放入时间轮： 延迟时间10秒， 每次续期30秒
 
-![image-20260409224658706](spring cache & lettuce.assets/image-20260409224658706.png)
+![image-20260409224658706](spring-cache&lettuce.assets/image-20260409224658706.png)
 
-![image-20260409224227214](spring cache & lettuce.assets/image-20260409224227214.png)
+![image-20260409224227214](spring-cache&lettuce.assets/image-20260409224227214.png)
 
 
 ### 延时队列
@@ -120,19 +120,19 @@ RedissonClient redissonClient = Redisson.create(config);
 
 初始化连接：
 
-![image-20260412172324998](spring cache & lettuce.assets/image-20260412172324998.png)
+![image-20260412172324998](spring-cache&lettuce.assets/image-20260412172324998.png)
 
 
 
 初始化connection、pubSubConnection
 
-![image-20260412172447270](spring cache & lettuce.assets/image-20260412172447270.png)
+![image-20260412172447270](spring-cache&lettuce.assets/image-20260412172447270.png)
 
 
 
 
 
-![image-20260412172223017](spring cache & lettuce.assets/image-20260412172223017.png)
+![image-20260412172223017](spring-cache&lettuce.assets/image-20260412172223017.png)
 
 
 
@@ -157,13 +157,13 @@ new RedisExecutor
 
 从ConnectionsHolder中获取一个连接
 
-![image-20260412122600658](spring cache & lettuce.assets/image-20260412122600658.png)
+![image-20260412122600658](spring-cache&lettuce.assets/image-20260412122600658.png)
 
 
 
-![image-20260412123438547](spring cache & lettuce.assets/image-20260412123438547.png)
+![image-20260412123438547](spring-cache&lettuce.assets/image-20260412123438547.png)
 
-![image-20260412123453419](spring cache & lettuce.assets/image-20260412123453419.png)
+![image-20260412123453419](spring-cache&lettuce.assets/image-20260412123453419.png)
 
 
 
