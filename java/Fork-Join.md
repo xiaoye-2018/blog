@@ -1,8 +1,13 @@
 # ForkJoinPool
 
-Fork-Join： 见名知意，采用分而治之对任务进行拆分，在归并的过程。 体现在提交一些**需要递归计算**之类的任务。
+Fork-Join： 采用分而治之对任务进行拆分，在归并的过程。 体现在提交一些**需要递归计算**之类的任务。
 
 主要用于处理密集型任务，内部设计采用工作窃取机制，尽量压榨系统CPU资源。
+
+内部设计总览：
+![](./Fork-Join.assets/forkjoin-基本信息.jpg)
+
+
 
 
 
@@ -56,6 +61,8 @@ this.ctl = ((np << AC_SHIFT) & AC_MASK) | ((np << TC_SHIFT) & TC_MASK);
 
 
 ## 提交任务
+流程如下：
+![](./Fork-Join.assets/forkjoin-执行过程.drawio.png)
 
 pool.submit(callable):  最终会包装一个ForkJoinTask#AdaptedCallable提交给forkjoinPool。 最终调用externalPush
 
