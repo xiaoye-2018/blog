@@ -18,22 +18,22 @@
   * [Stack & Queue](/java/stack&queue.md)
   * [SPI 机制](/java/SPI机制.md)
   * [Java 杂项](/java/miscellaneous.md)
-  * [Java Reference](/java/Java reference.md)
+  * [Java Reference](/java/Java_reference.md)
 
 * **🏗 Spring 生态**
   * [Spring 源码](/后端框架/Spring.md)
   * [Spring MVC](/后端框架/springmvc.md)
   * [Spring Boot](/后端框架/springboot.md)
-  * [Spring AOP](/后端框架/Spring AOP.md)
-  * [Spring Cloud](/后端框架/springcloud.md)
-  * [Spring Cache & Redis](/后端框架/spring cache & lettuce.md)
-  * [Spring WebFlux](/2025/webflux.md)
-  * [Spring Data JPA](/后端框架/Hibernate & Spring Data JPA.md)
+  * [Spring AOP](/后端框架/Spring_AOP.md)
+  * [Spring Data JPA](/后端框架/Hibernate&Spring-Data-JPA.md)
   * [MyBatis-Plus](/后端框架/mybatis-plus.md)
-  * [Spring 面试](/后端框架/极客时间&spring面试题.md)
+  * [Spring Cloud](/后端框架/springcloud.md)
+  * [Spring 整合Redis自定义超时](/后端框架/spring_customize_redis_timeout.md)
 
-* **📨 网络 & 中间件**
+* **📨 中间件**
   * [Netty](/netty/netty.md)
+  * [Lettuce 浅析](/后端框架/lettuce实现分析.md)
+  * [Redission 浅析](/后端框架/redission浅析.md)
   * [HTTP 协议](/2025/HTTP.md)
 
 * **🐍 爬虫 & 脚本**

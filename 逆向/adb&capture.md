@@ -1201,7 +1201,8 @@ sys.stdin.read()　
 
 4. 解析pem证书hash值： openssl x509 -subject_hash_old -in FiddlerRoot.pem  
 
-   ![image-20230207222526833](https://gitee.com/xiaoye-notebook/img/raw/master/20230312174614.png)
+![](./adb&capture.assets/fR6wMh.png)
+
 
 5. 修改pem证书文件名为： [hash].0     （即：269954b.0）
 
