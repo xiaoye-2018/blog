@@ -1020,57 +1020,61 @@ static final int SMASK       = 0x0000ffff;  // short bits for tags
 
 - worker工作模式：runWorker： 先窃取任务，在执行本地
 
-- JDK8死锁问题： 
+  
 
-  ```java
-   @Test
-      public void testWorkStealing() throws Exception {
-          final int parallelism = 4;
-          final ForkJoinPool pool = new ForkJoinPool(parallelism);
-          final CyclicBarrier barrier = new CyclicBarrier(parallelism);
-  
-          final List<CallableTask> callableTasks = Collections.nCopies(parallelism, new CallableTask(barrier));
-  
-          int result = pool.submit(new Callable<Integer>() {
-              @Override
-              public Integer call() throws Exception {
-                  int result = 0;
-                  System.out.println("submit: " + Thread.currentThread().getName());
-                  // Deadlock in invokeAll(), rather than stealing work
-  
-                  // invokeAll: 会将任务以外部任务的形式 (底层externalPush) 提交到非工作线程的队列上（同一个WorkQueue）。 每个工作线程都在执行任务，且每个任务都在wait。
-                  // 当前的工作线程无法窃取到任务：awaitJoin只会调用helpStealer 窃取工作内部工作线程的任务，
-                  // 此时由于当前线程队列为空，补偿线程也无法创建，因此会阻塞死锁
-                  for (Future<Integer> future : pool.invokeAll(callableTasks)) {
-                      result += future.get();
-                  }
-                  return result;
-              }
-          }).get();
-          System.out.println(result == parallelism);
-          // assertThat(result, equalTo(parallelism));
-      }
-  
-   private static class CallableTask implements Callable<Integer> {
-          private final CyclicBarrier barrier;
-  
-          CallableTask(CyclicBarrier barrier) {
-              this.barrier = barrier;
-          }
-  
-          @Override
-          public Integer call() throws Exception {
-              System.out.println(Thread.currentThread().getName());
-              barrier.await();
-              return 1;
-          }
-      }
-  ```
+## JDK8死锁问题： 
 
-  JDK 21中没有这个bug，invokeAll()的逻辑有所改变
 
-  - 首先会调用poolSubmit 直接将任务放到当前线程的WorkQueue中。 **而不是放入非工作队列**
-  - 然后逆向遍历任务 执行quietlyJoin()， 如果任务没有完成，执行tryRemoveAndExec将任务拿出来**主动执行**。
+
+```java
+ @Test
+    public void testWorkStealing() throws Exception {
+        final int parallelism = 4;
+        final ForkJoinPool pool = new ForkJoinPool(parallelism);
+        final CyclicBarrier barrier = new CyclicBarrier(parallelism);
+
+        final List<CallableTask> callableTasks = Collections.nCopies(parallelism, new CallableTask(barrier));
+
+        int result = pool.submit(new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                int result = 0;
+                System.out.println("submit: " + Thread.currentThread().getName());
+                // Deadlock in invokeAll(), rather than stealing work
+
+                // invokeAll: 会将任务以外部任务的形式 (底层externalPush) 提交到非工作线程的队列上（同一个WorkQueue）。 每个工作线程都在执行任务，且每个任务都在wait。
+                // 当前的工作线程无法窃取到任务：awaitJoin只会调用helpStealer 窃取工作内部工作线程的任务，
+                // 此时由于当前线程队列为空，补偿线程也无法创建，因此会阻塞死锁
+                for (Future<Integer> future : pool.invokeAll(callableTasks)) {
+                    result += future.get();
+                }
+                return result;
+            }
+        }).get();
+        System.out.println(result == parallelism);
+        // assertThat(result, equalTo(parallelism));
+    }
+
+ private static class CallableTask implements Callable<Integer> {
+        private final CyclicBarrier barrier;
+
+        CallableTask(CyclicBarrier barrier) {
+            this.barrier = barrier;
+        }
+
+        @Override
+        public Integer call() throws Exception {
+            System.out.println(Thread.currentThread().getName());
+            barrier.await();
+            return 1;
+        }
+    }
+```
+
+JDK 21中没有这个bug，invokeAll()的逻辑有所改变
+
+- 首先会调用poolSubmit 直接将任务放到当前线程的WorkQueue中。 **而不是放入非工作队列**
+- 然后逆向遍历任务 执行quietlyJoin()， 如果任务没有完成，执行tryRemoveAndExec将任务拿出来**主动执行**。
 
 - 解释上面过程：当提交任务A、B、C、D； 并行度4。 由于submit 会暂用一个工作线程，因此还剩余3个工作线程
 

@@ -486,7 +486,7 @@ public int size() {
 > 5. 加载因子`固定0.75`，不可以修改，为了防止经常发生冲突
 > 6. 数组采用懒初始化，在put元素时才会对数组进行初始化（默认16），如果初始化指定空间大小，那么真实capacity = `tableSizeFor(1.5 * 参数 +1)`，同时满足 capacity = 2 ^n,   如传入11~16，那么capacity就是32， 传入10，那么会变成16， tableSizeFor(n): 返回>=n且满足2^x的数
 
-- 不能插入空值
+- 不能插入**空值**
 
 
 
@@ -672,7 +672,7 @@ final V putVal(K key, V value, boolean onlyIfAbsent) {
 
 **addCount()**
 
-> 主要用于存储hashMap中元素的个数，使用cell数组来对多个线程进行分开计算，采用分而治之的办法来减少锁的粒度， 类似于LongAdder类
+> 主要用于存储hashMap中元素的个数，使用cell数组来统计数量，减少锁的粒度， 类似于LongAdder类
 
 ```java
 /**
@@ -832,7 +832,7 @@ private final void fullAddCount(long x, boolean wasUncontended) {
 
 transfer()
 
-> 采用多个线程同时扩容，通过竞争transferIndex来区分扩容的哪一部分元素，当一个位置元素转移完成后将会把原数组原位置置为forwardingNode，forwardingNode节点中包含了扩容后的数组nextTab
+> 采用多个线程同时扩容，通过竞争transferIndex来确定需要帮忙转移哪一部分元素，当一个位置元素转移完成后将会把原数组原位置置为forwardingNode，forwardingNode节点中包含了扩容后的数组nextTab
 
 ![](ConcurrentHashMap.assets/并发扩容.png)
 

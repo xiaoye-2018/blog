@@ -2,9 +2,9 @@ AQS
 
 ### 简介		
 
-​		AQS全称`AbstractQueueSynchronizer`，基于FIFO等待队列实现的一个同步器框架，JUC包中的很多类都基础自AQS，比如：ReentrantLock，ReentrantReadWriteLock、CountDownLatch等，AQS是在Java语言层面实现锁的机制，避免了用户态跟内核态之间的切换，我们知道Synchronized属于操作系统层面，在JDK6之前，使用synchronized对程序进行加锁，对应操作系统的MUTEX实现，在线程竞争激烈的环境下会造成频繁的上下文切换，进而严重影响并发性能，在JDK6 之后，官方对Synchronized做了很多的优化，比如偏向锁、轻量级锁、自适应锁，目前用Synchronized也是没有好大的性能问题了。
+​		AQS全称`AbstractQueueSynchronizer`，基于FIFO等待队列实现的一个同步器框架，JUC包中的很多并发工具类都基于AQS实现，比如：ReentrantLock，ReentrantReadWriteLock、CountDownLatch等，AQS是在Java语言层面实现锁的机制，避免了用户态跟内核态之间的切换，我们知道Synchronized属于JVM层面实现，在JDK6之前，仅可以使用synchronized对程序进行加锁，JVM底层对应操作系统的MUTEX实现，在线程竞争激烈的环境下会造成频繁的上下文切换，进而严重影响并发性能，在JDK6 之后，官方对Synchronized做了很多的优化，比如偏向锁、轻量级锁、自适应锁，目前用Synchronized也基本媲美于ReentrantLock。
 
-相比Synchronized 来说， `AQS功能更加丰富`：
+但是相比Synchronized 来说， `AQS功能更加丰富`：
 
 - 支持快速响应(tryAcquire)，获取失败立即返回false
 
@@ -16,11 +16,11 @@ AQS
 
 
 
-​		AQS使用CLH锁队列 的变体 来实现， 通过`state`的值来记录是否有线程持有锁，具体变化根据具体实现来看，通常state为0表示没有线程持有锁，> 0 表示有线程持有该资源
+​		AQS使用CLH（三个人名缩写）锁队列 的变体 来实现， 通过`state`的值来记录是否有线程持有锁，具体变化根据具体实现来看，通常state为0表示没有线程持有锁，> 0 表示有线程持有该资源
 
 
 
-​		同步器中的head始终指向的是当前正在运行的节点，tail指向队列最后一个节点， 当前持有锁的节点（也就是head节点）调用release后，会将后续节点唤醒，同时当前节点的指针赋null，大致变化如下：
+​		同步器中的head始终指向的是当前持有锁的线程节点，tail指向队列最后一个节点， 当前持有锁的节点（也就是head节点）调用release后，会将后续节点唤醒，同时当前节点的指针赋null，大致变化如下：
 
 
 
@@ -868,6 +868,10 @@ public void testLock() {
 
 使用AQS的state来代表持有锁的数量
 
+### 非公平锁
+
+> ReentrantLock默认为非公平
+
 ```java
 // 非公平获取锁
 final boolean nonfairTryAcquire(int acquires) {
@@ -915,10 +919,6 @@ protected final boolean isHeldExclusively() {
 ```
 
 
-
-### 非公平锁
-
-> ReentrantLock默认为非公平
 
 ```java
 static final class NonfairSync extends Sync {
