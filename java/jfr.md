@@ -3,7 +3,7 @@
 JDK 提供的轻量级监控工具，随时可以开启、暂停。 
 
 不建议打开 -XX:+HeapDumpOnOutOfMemoryError
-directBytebuf、mmap、fd exceed 分配出现的OOM 无法dump 文件， 同时dump 需要STW，写入dump文件到磁盘需要花费大量的事件。 
+directBytebuf、mmap、fd exceed 分配出现的OOM 无法dump 文件， 同时dump 需要STW，写入dump文件到磁盘需要花费大量的时间。 
 
 
 JFR 以滚动的方式持续写入文件到Repository，一个chunk写满后（默认12M）开启一个新文件。 当执行 JFR.check JFR.dump 也会切换chunk
